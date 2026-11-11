@@ -1,0 +1,31 @@
+# Hooks locais: rodam no `git commit` (instale com `make hooks`).
+# Revs fixadas por SHA de commit (a tag fica no comentário): tag pode ser movida, SHA não.
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e # v8.30.1
+    hooks:
+      - id: gitleaks
+
+  - repo: local
+    hooks:
+      - id: check-privacy
+        name: gate de privacidade (contrato 3)
+        # --require-terms: na máquina do autor, sem a lista o commit falha.
+        entry: python scripts/check_privacy.py --require-terms
+        language: python
+        types: [text]
+
+      - id: validate-commands
+        name: frontmatter dos comandos (contrato 1)
+        entry: python scripts/validate_commands.py
+        language: python
+        additional_dependencies: ["PyYAML==6.0.3"]
+        files: ^commands/.*\.md$
+        pass_filenames: false
+
+      - id: validate-settings
+        name: política de permissões (contrato 2)
+        entry: python scripts/validate_settings.py
+        language: python
+        files: ^settings/settings\.example\.json$
+        pass_filenames: false

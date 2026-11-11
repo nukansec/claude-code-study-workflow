@@ -1,0 +1,20 @@
+% Cabeçalho LaTeX dos resumos de estudo (usado com: pandoc -H resumo_cabecalho.tex).
+% Ver MODELO_resumo-de-estudo.md.
+\usepackage{xcolor}
+
+% \linhas{N}: N linhas pautadas em cinza-claro para resposta escrita à mão (tablet).
+% 0,9 cm entre linhas, confortável para escrever com caneta no Samsung Notes.
+% O \parskip é zerado dentro do grupo para o espaçamento não somar o espaço entre parágrafos.
+\newcount\resumolinhacont
+\newcommand{\linhas}[1]{%
+  \par\medskip
+  \begingroup
+  \setlength{\parskip}{0pt}%
+  \resumolinhacont=0\relax
+  \loop\ifnum\resumolinhacont<#1\relax
+    \advance\resumolinhacont by 1\relax
+    \noindent\rule{0pt}{0.9cm}{\color{black!25}\rule{\linewidth}{0.4pt}}\par
+  \repeat
+  \endgroup
+  \medskip
+}

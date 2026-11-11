@@ -1,0 +1,10 @@
+// Regras do markdownlint para o repositório.
+{
+  "default": true,
+  // Prosa em pt-BR com um parágrafo por linha: quebrar em 80 colunas só gera
+  // diff ruidoso e não melhora a leitura renderizada.
+  "MD013": false,
+  // Estilo da linha separadora de tabela (|---| x | --- |) é cosmético e não
+  // muda a renderização; o repositório usa |---|.
+  "MD060": false
+}

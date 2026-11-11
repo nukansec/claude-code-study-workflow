@@ -1,0 +1,51 @@
+[project]
+name = "claude-code-study-workflow"
+version = "0.1.0"
+description = "Configuração do Claude Code para estudo, com validação dos contratos (policy as code)."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12,<3.13"
+
+# Não é pacote instalável: as dependências ficam em grupos (PEP 735), instalados
+# com `pip install --group <nome>` (pip >= 25.1). Ver o target `setup` do Makefile.
+[dependency-groups]
+runtime = [
+    "PyYAML==6.0.3",
+]
+dev = [
+    {include-group = "runtime"},
+    "pytest==9.2.0",
+    "ruff==0.17.4",
+    "pre-commit==4.7.0",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["scripts", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "SIM", "PTH"]
+
+[tool.ruff.lint.isort]
+# Os scripts são importados pelos testes como módulos de topo (pythonpath = scripts).
+known-first-party = ["_common", "check_privacy", "validate_commands", "validate_settings"]
+
+[tool.ruff.lint.per-file-ignores]
+# Testes usam assert (S101) e chamam os scripts e o git como subprocesso (S603, S607).
+"tests/**" = ["S101", "S603", "S607"]
+# git é chamado por nome, resolvido no PATH (S607), com argumentos fixos.
+"scripts/_common.py" = ["S603", "S607"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["scripts"]
+addopts = "-ra --strict-markers"
+
+[tool.privacy_gate]
+# Arquivos ignorados pelo gate. Só as fixtures que violam o gate DE PROPÓSITO,
+# para os testes provarem que ele falha. Um teste garante que esta lista não
+# cresce para fora de tests/fixtures/privacy/bad/ (ver docs/adr/0002).
+exclude = [
+    "tests/fixtures/privacy/bad/",
+]

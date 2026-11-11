@@ -1,0 +1,25 @@
+# Segredos (nunca versionar)
+.env
+.env.*
+*.tfvars
+*.tfvars.json
+*.pem
+*.key
+
+# Lista local de termos do gate de privacidade (ver docs/adr/0002)
+.privacy-terms.txt
+
+# Contexto pessoal do Claude Code (o CLAUDE.md público é versionado)
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Ferramentas
+node_modules/
+.bin/

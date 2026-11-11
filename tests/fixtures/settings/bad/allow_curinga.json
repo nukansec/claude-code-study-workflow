@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": ["Bash(ls *)", "Bash(*)"],
+    "deny": [
+      "Bash(find * -delete*)",
+      "Bash(find * -exec *)",
+      "Read(**/.env)",
+      "Read(**/*.tfvars)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)"
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+// markdownlint-cli2: o que lintar. As regras ficam em .markdownlint.jsonc.
+{
+  "globs": ["**/*.md"],
+  "ignores": [".venv/**", "node_modules/**", "tests/fixtures/**"]
+}

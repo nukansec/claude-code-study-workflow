@@ -1,0 +1,5 @@
+// Comandos do Claude Code são prompts: frontmatter + instrução, sem título.
+{
+  "extends": "../.markdownlint.jsonc",
+  "MD041": false
+}
