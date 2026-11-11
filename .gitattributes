@@ -1,0 +1,5 @@
+# LF em todo arquivo de texto: os validadores e o markdownlint veem o mesmo
+# conteúdo no Windows e no Linux do CI.
+* text=auto eol=lf
+*.pdf binary
+*.png binary
